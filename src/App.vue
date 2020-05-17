@@ -12,13 +12,16 @@
     </h1>
 
     <div v-for="(todo, index) in todos" :key="index">{{ todo.title }}</div>
+    <br />
+    <br />
+    <input v-bind:value="message" v-on:input="setMessage" />
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      message: "Benny",
+      message: "Hey, wie gehts dir",
       favoriteColor: "green",
       errorColor: "green",
       todos: [
@@ -35,6 +38,10 @@ export default {
       this.counter++;
       if (colorArray.length === this.counter) this.counter = 0;
       this.errorColor = colorArray[this.counter];
+    },
+    setMessage(e) {
+      console.log(e);
+      this.message = e.target.value;
     },
   },
 };
