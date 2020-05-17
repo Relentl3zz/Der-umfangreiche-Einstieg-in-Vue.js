@@ -1,7 +1,7 @@
 <template>
   <h1>
     Hello World
-    {{ message }}
+    <span v-bind:style="{ color: favoriteColor }"> {{ message }} </span>
   </h1>
 </template>
 
@@ -9,7 +9,8 @@
 export default {
   data() {
     return {
-      message: "Lukas",
+      message: "Benny",
+      favoriteColor: "green",
     };
   },
 };
