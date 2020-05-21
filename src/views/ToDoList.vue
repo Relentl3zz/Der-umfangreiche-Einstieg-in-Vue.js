@@ -4,13 +4,23 @@
 
     <h2>Active ToDos</h2>
 
-    <ToDoItem v-for="todo in activeToDos" :key="todo.id" v-bind:todo="todo" />
+    <ToDoItem
+      v-for="todo in activeToDos"
+      :key="todo.id"
+      v-bind:todo="todo"
+      v-on:onDeleteToDo="deleteToDo"
+    />
 
     <br />
 
     <h2>Done ToDos</h2>
 
-    <ToDoItem v-for="todo in doneToDos" :key="todo.id" v-bind:todo="todo" />
+    <ToDoItem
+      v-for="todo in doneToDos"
+      :key="todo.id"
+      v-bind:todo="todo"
+      v-on:onDeleteToDo="deleteToDo"
+    />
   </div>
 </template>
 
@@ -37,12 +47,12 @@ export default {
       this.todos.push({ id: this.counter++, title: e.target.value });
       e.target.value = "";
     },
-    deleteToDo(id) {
-      this.todos.splice(
-        this.todos.findIndex((item) => item.id === id),
-        1
-      );
-    },
+  },
+  deleteToDo(id) {
+    this.todos.splice(
+      this.todos.findIndex((item) => item.id === id),
+      1
+    );
   },
   computed: {
     activeToDos() {
