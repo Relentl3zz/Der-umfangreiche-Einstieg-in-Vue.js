@@ -2,7 +2,8 @@
   <div>
     <input v-on:keyup.enter="addToDo" />
     <div v-for="(todo, index) in todos" :key="index">
-      {{ todo.title }} <button v-on:click="deleteToDo(todo.id)">X</button>
+      <button v-on:click="deleteToDo(todo.id)">X</button>
+      <input type="checkbox" v-model="todo.done" /> {{ todo.title }}
     </div>
   </div>
 </template>
@@ -12,9 +13,9 @@ export default {
   data() {
     return {
       todos: [
-        { id: 1, title: "HTML, CSS & JS lernen" },
-        { id: 2, title: "Vue lernen" },
-        { id: 3, title: "Next facebook bauen" },
+        { id: 1, title: "HTML, CSS & JS lernen", done: false },
+        { id: 2, title: "Vue lernen", done: false },
+        { id: 3, title: "Next facebook bauen", done: true },
       ],
       counter: 4,
     };
