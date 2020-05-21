@@ -29,8 +29,9 @@ export default {
         { id: 2, title: "Vue lernen", done: false },
         { id: 3, title: "Next facebook bauen", done: true },
         { id: 4, title: "Vue aufgabe erledigt", done: true },
+        { id: 5, title: "Vue computed properties gelernt", done: true },
       ],
-      counter: 4,
+      counter: 6,
     };
   },
   methods: {
@@ -44,7 +45,11 @@ export default {
         1
       );
     },
-    computed: {},
+  },
+  computed: {
+    activeToDos() {
+      return this.todos.filter((item) => !item.done);
+    },
     doneToDos() {
       return this.todos.filter((item) => item.done);
     },
