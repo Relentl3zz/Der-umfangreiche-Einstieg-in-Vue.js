@@ -4,13 +4,23 @@
 
     <h2>Active ToDos</h2>
 
-    <ToDoItem v-for="todo in activeToDos" :key="todo.id" v-bind:todo="todo" />
+    <ToDoItem
+      v-for="todo in activeToDos"
+      :key="todo.id"
+      v-bind:todo="todo"
+      v-on:onDeleteToDo="deleteToDo"
+    />
 
     <br />
 
     <h2>Done ToDos</h2>
 
-    <ToDoItem v-for="todo in doneToDos" :key="todo.id" v-bind:todo="todo" />
+    <ToDoItem
+      v-for="todo in doneToDos"
+      :key="todo.id"
+      v-bind:todo="todo"
+      v-on:onDeleteToDo="deleteToDo"
+    />
   </div>
 </template>
 
