@@ -47,12 +47,12 @@ export default {
       this.todos.push({ id: this.counter++, title: e.target.value });
       e.target.value = "";
     },
-    deleteToDo(id) {
-      this.todos.splice(
-        this.todos.findIndex((item) => item.id === id),
-        1
-      );
-    },
+  },
+  deleteToDo(id) {
+    this.todos.splice(
+      this.todos.findIndex((item) => item.id === id),
+      1
+    );
   },
   computed: {
     activeToDos() {
