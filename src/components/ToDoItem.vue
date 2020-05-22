@@ -1,6 +1,9 @@
 <template>
   <div>
-    <input type="checkbox" v-model="todo.done" /> {{ todo.title }}
+    <input type="checkbox" v-model="todo.done" />
+    <router-link :to="{ name: 'ToDo-Details', params: { id: todo.id } }">
+      {{ todo.title }}
+    </router-link>
     <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
   </div>
 </template>
