@@ -1,6 +1,18 @@
 <template>
   <div>
+    <h2>Add To Do</h2>
     <input v-on:keyup.enter="addToDo" />
+
+    <h2>Search Results</h2>
+    <input v-model="searchQuery" />
+    <div v-if="searchQuery">
+      <ToDoItem
+        v-for="todo in filteredToDos"
+        :key="todo.id"
+        v-bind:todo="todo"
+        v-on:onDeleteToDo="deleteToDo"
+      />
+    </div>
 
     <h2>Active ToDos</h2>
 
@@ -40,6 +52,7 @@ export default {
         { id: 5, title: "Vue computed properties gelernt", done: true },
       ],
       counter: 6,
+      searchQuery: "",
     };
   },
   methods: {
@@ -60,6 +73,11 @@ export default {
     },
     doneToDos() {
       return this.todos.filter((item) => item.done);
+    },
+    filteredToDos() {
+      return this.todos.filter((item) =>
+        item.title.toLowerCase().startsWith(this.searchQuery.toLowerCase())
+      );
     },
   },
 };
