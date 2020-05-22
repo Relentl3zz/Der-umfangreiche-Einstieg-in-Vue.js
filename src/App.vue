@@ -1,15 +1,15 @@
 <template>
   <div>
-    <ToDoList />
+    <NavBar />
+    <router-view />
   </div>
 </template>
+
 <script>
-import ToDoList from "@/views/ToDoList";
+import NavBar from "@/components/NavBar.vue";
 export default {
   components: {
-    ToDoList,
+    NavBar,
   },
 };
 </script>
-
-<style></style>
