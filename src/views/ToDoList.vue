@@ -37,6 +37,9 @@ export default {
       e.target.value = "";
     },
   },
+  mounted() {
+    this.$store.dispatch("fetchToDos");
+  },
   computed: {
     activeToDos() {
       return this.$store.getters.activeToDos;

@@ -1,17 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import ToDoService from "@/Services/ToDoService.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    todos: [
-      { id: 1, title: "HTML, CSS & JS lernen", done: false },
-      { id: 2, title: "Vue lernen", done: false },
-      { id: 3, title: "Next facebook bauen", done: true },
-      { id: 4, title: "Vue aufgabe erledigt", done: true },
-      { id: 5, title: "Vue computed properties gelernt", done: true },
-    ],
+    todos: [],
     counter: 6,
     searchQuery: "",
   },
@@ -25,8 +20,15 @@ export default new Vuex.Store({
         1
       );
     },
+    SET_TODOS(state, data) {
+      state.todos = data;
+    },
   },
-  actions: {},
+  actions: {
+    fetchToDos({ commit }) {
+      ToDoService.getToDos().then(({ data }) => commit("SET_TODOS", data));
+    },
+  },
   getters: {
     activeToDos: (state) => {
       return state.todos.filter((item) => !item.done);
