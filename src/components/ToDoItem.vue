@@ -4,7 +4,7 @@
     <router-link :to="{ name: 'ToDo-Details', params: { id: todo.id } }">
       {{ todo.title }}
     </router-link>
-    <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
+    <button v-on:click="onDeleteToDo(todo.id)">X</button>
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
     todo: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    onDeleteToDo(id) {
+      this.$store.commit("DELETE_TODO", id);
     },
   },
 };

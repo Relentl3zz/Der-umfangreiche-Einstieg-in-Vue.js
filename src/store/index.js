@@ -16,13 +16,12 @@ export default new Vuex.Store({
     searchQuery: "",
   },
   mutations: {
-    ADD_TODO(e) {
-      this.todos.push({ id: this.counter++, title: e.target.value });
-      e.target.value = "";
+    ADD_TODO(state, title) {
+      state.todos.push({ id: state.counter++, title });
     },
-    DELETE_TODO(id) {
-      this.todos.splice(
-        this.todos.findIndex((item) => item.id === id),
+    DELETE_TODO(state, id) {
+      state.todos.splice(
+        state.todos.findIndex((item) => item.id === id),
         1
       );
     },

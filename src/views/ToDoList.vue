@@ -10,29 +10,18 @@
         v-for="todo in filteredToDos"
         :key="todo.id"
         v-bind:todo="todo"
-        v-on:onDeleteToDo="deleteToDo"
       />
     </div>
 
     <h2>Active ToDos</h2>
 
-    <ToDoItem
-      v-for="todo in activeToDos"
-      :key="todo.id"
-      v-bind:todo="todo"
-      v-on:onDeleteToDo="deleteToDo"
-    />
+    <ToDoItem v-for="todo in activeToDos" :key="todo.id" v-bind:todo="todo" />
 
     <br />
 
     <h2>Done ToDos</h2>
 
-    <ToDoItem
-      v-for="todo in doneToDos"
-      :key="todo.id"
-      v-bind:todo="todo"
-      v-on:onDeleteToDo="deleteToDo"
-    />
+    <ToDoItem v-for="todo in doneToDos" :key="todo.id" v-bind:todo="todo" />
   </div>
 </template>
 
@@ -41,6 +30,12 @@ import ToDoItem from "@/components/ToDoItem.vue";
 export default {
   components: {
     ToDoItem,
+  },
+  methods: {
+    addToDo(e) {
+      this.$store.commit("ADD_TODO", e.target.value);
+      e.target.value = "";
+    },
   },
   computed: {
     activeToDos() {
