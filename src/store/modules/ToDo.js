@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import ToDoService from "@/Services/ToDoService.js";
+import Router from "@/router/index.js";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,10 @@ export default {
     SET_SEARCHQUERY(state, query) {
       state.searchQuery = query;
     },
+    SET_TITLE(state, data) {
+      state.todos[state.todos.findIndex((item) => item.id === data.id)].title =
+        data.title;
+    },
   },
   actions: {
     fetchToDos({ commit }) {
@@ -51,6 +56,12 @@ export default {
         commit("TOGGLE_TODO", data)
       );
     },
+    changeTitle({ commit }, todo) {
+      ToDoService.updateToDo(todo)
+        .then(({ data }) => commit("SET_TITLE", data))
+        .catch((Error) => console.log(Error))
+        .finally(() => Router.push("/"));
+    },
   },
   getters: {
     activeToDos: (state) => {
@@ -63,6 +74,9 @@ export default {
       return state.todos.filter((item) =>
         item.title.toLowerCase().startsWith(state.searchQuery.toLowerCase())
       );
+    },
+    getToDoById: (state) => (id) => {
+      return state.todos.find((item) => item.id === id);
     },
   },
 };
