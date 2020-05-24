@@ -52,7 +52,7 @@ export default {
     },
     searchQuery: {
       get() {
-        return this.$store.state.searchQuery;
+        return this.$store.state.todo.searchQuery;
       },
       set(value) {
         this.$store.commit("SET_SEARCHQUERY", value);
