@@ -22,6 +22,10 @@ export default new Vuex.Store({
     SET_TODOS(state, data) {
       state.todos = data;
     },
+    TOGGLE_TODO(state, data) {
+      state.todos[state.todos.findIndex((item) => item.id === data.id)].done =
+        data.done;
+    },
   },
   actions: {
     fetchToDos({ commit }) {
@@ -34,11 +38,15 @@ export default new Vuex.Store({
         .then(({ data }) => commit("ADD_TODO", data))
         .catch((Error) => console.log(Error));
     },
-    /* eslint-disable */
     deleteToDo({ commit }, id) {
       ToDoService.deleteToDo(id)
         .then(() => commit("DELETE_TODO", id))
         .catch((Error) => console.log(Error));
+    },
+    toggleToDo({ commit }, todo) {
+      ToDoService.updateToDo(todo).then(({ data }) =>
+        commit("TOGGLE_TODO", data)
+      );
     },
   },
   getters: {

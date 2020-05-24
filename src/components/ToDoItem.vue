@@ -1,6 +1,10 @@
 <template>
   <div>
-    <input type="checkbox" v-model="todo.done" />
+    <input
+      type="checkbox"
+      v-bind:checked="todo.done"
+      @change="onToggleToDo(todo.id, todo.done)"
+    />
     <router-link :to="{ name: 'ToDo-Details', params: { id: todo.id } }">
       {{ todo.title }}
     </router-link>
@@ -19,6 +23,9 @@ export default {
   methods: {
     onDeleteToDo(id) {
       this.$store.dispatch("deleteToDo", id);
+    },
+    onToggleToDo(id, done) {
+      this.$store.dispatch("toggleToDo", { id, done: !done });
     },
   },
 };

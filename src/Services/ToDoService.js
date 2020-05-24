@@ -21,4 +21,7 @@ export default {
   deleteToDo(id) {
     return apiClient.delete(PATH + "/" + id);
   },
+  updateToDo(payload) {
+    return apiClient.patch(PATH + "/" + payload.id, payload);
+  },
 };
