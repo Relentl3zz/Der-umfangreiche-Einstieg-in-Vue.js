@@ -4,8 +4,8 @@
     <input v-on:keyup.enter="addToDo" />
 
     <h2>Search Results</h2>
-    <input v-model="$store.state.searchQuery" />
-    <div v-if="$store.state.searchQuery">
+    <input v-model="searchQuery" />
+    <div v-if="searchQuery">
       <ToDoItem
         v-for="todo in filteredToDos"
         :key="todo.id"
@@ -49,6 +49,14 @@ export default {
     },
     filteredToDos() {
       return this.$store.getters.filteredToDos;
+    },
+    searchQuery: {
+      get() {
+        return this.$store.state.searchQuery;
+      },
+      set(value) {
+        this.$store.commit("SET_SEARCHQUERY", value);
+      },
     },
   },
 };

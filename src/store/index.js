@@ -26,6 +26,9 @@ export default new Vuex.Store({
       state.todos[state.todos.findIndex((item) => item.id === data.id)].done =
         data.done;
     },
+    SET_SEARCHQUERY(state, query) {
+      state.searchQuery = query;
+    },
   },
   actions: {
     fetchToDos({ commit }) {
