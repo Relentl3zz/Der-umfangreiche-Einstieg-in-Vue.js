@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     addToDo(e) {
-      this.$store.commit("ADD_TODO", e.target.value);
+      this.$store.dispatch("addToDo", { title: e.target.value, done: false });
       e.target.value = "";
     },
   },

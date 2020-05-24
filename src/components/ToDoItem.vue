@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     onDeleteToDo(id) {
-      this.$store.commit("DELETE_TODO", id);
+      this.$store.dispatch("deleteToDo", id);
     },
   },
 };

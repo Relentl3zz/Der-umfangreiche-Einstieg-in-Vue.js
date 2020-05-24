@@ -7,12 +7,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     todos: [],
-    counter: 6,
     searchQuery: "",
   },
   mutations: {
-    ADD_TODO(state, title) {
-      state.todos.push({ id: state.counter++, title });
+    ADD_TODO(state, todo) {
+      state.todos.push(todo);
     },
     DELETE_TODO(state, id) {
       state.todos.splice(
@@ -26,7 +25,20 @@ export default new Vuex.Store({
   },
   actions: {
     fetchToDos({ commit }) {
-      ToDoService.getToDos().then(({ data }) => commit("SET_TODOS", data));
+      ToDoService.getToDos()
+        .then(({ data }) => commit("SET_TODOS", data))
+        .catch((Error) => console.log(Error));
+    },
+    addToDo({ commit }, todo) {
+      ToDoService.addToDo(todo)
+        .then(({ data }) => commit("ADD_TODO", data))
+        .catch((Error) => console.log(Error));
+    },
+    /* eslint-disable */
+    deleteToDo({ commit }, id) {
+      ToDoService.deleteToDo(id)
+        .then(() => commit("DELETE_TODO", id))
+        .catch((Error) => console.log(Error));
     },
   },
   getters: {
