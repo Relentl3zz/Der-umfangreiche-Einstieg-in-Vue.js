@@ -1,9 +1,5 @@
-import Vue from "vue";
-import Vuex from "vuex";
 import ToDoService from "@/Services/ToDoService.js";
 import Router from "@/router/index.js";
-
-Vue.use(Vuex);
 
 export default {
   state: {
