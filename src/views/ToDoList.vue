@@ -42,6 +42,7 @@
 <script>
 import ToDoItem from "@/components/ToDoItem.vue";
 import { ref, computed } from "vue";
+import { useSearch } from "@/hooks/useSearch";
 export default {
   components: {
     ToDoItem,
@@ -54,9 +55,8 @@ export default {
       { id: 4, title: "Vue aufgabe erledigt", done: true },
       { id: 5, title: "Vue computed properties gelernt", done: true },
     ]);
-    console.log(todos.value);
+
     const counter = ref(6);
-    const searchQuery = ref("");
 
     const addToDo = (e) => {
       todos.value.push({ id: counter.value++, title: e.target.value });
@@ -73,13 +73,10 @@ export default {
     const activeToDos = computed(() =>
       todos.value.filter((item) => !item.done)
     );
+
     const doneToDos = computed(() => todos.value.filter((item) => item.done));
 
-    const filteredToDos = computed(() =>
-      todos.value.filter((item) =>
-        item.title.toLowerCase().startsWith(searchQuery.value.toLowerCase())
-      )
-    );
+    const { searchQuery, filteredList } = useSearch(todos.value);
 
     return {
       todos,
@@ -89,7 +86,7 @@ export default {
       deleteToDo,
       activeToDos,
       doneToDos,
-      filteredToDos,
+      filteredToDos: filteredList,
     };
   },
 };
