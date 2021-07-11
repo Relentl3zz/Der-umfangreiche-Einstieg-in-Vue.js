@@ -3,10 +3,10 @@
     <input
       type="checkbox"
       v-bind:checked="modelValue"
-      v-on:click="$emit('update:modelValue', !modelValue)"
+      v-on:click="toggleTodo"
     />
     {{ todo.title }}
-    <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
+    <button v-on:click="deleteToDo(todo.id)">X</button>
   </div>
 </template>
 
@@ -15,6 +15,12 @@ export default {
   props: {
     todo: Object,
     modelValue: Boolean,
+  },
+  setup(props, context) {
+    const toggleTodo = () =>
+      context.emit("update:modelValue", !props.modelValue);
+    const deleteTodo = (id) => context.emit("onDeleteToDo", id);
+    return { deleteTodo, toggleTodo };
   },
 };
 </script>
