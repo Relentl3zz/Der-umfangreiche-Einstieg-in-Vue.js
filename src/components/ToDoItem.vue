@@ -2,8 +2,8 @@
   <div>
     <input
       type="checkbox"
-      v-bind:checked="todo.done"
-      v-on:click="$emit('input', !todo.done)"
+      v-bind:checked="modelValue"
+      v-on:click="$emit('update:modelValue', !modelValue)"
     />
     {{ todo.title }}
     <button v-on:click="$emit('onDeleteToDo', todo.id)">X</button>
@@ -12,7 +12,10 @@
 
 <script>
 export default {
-  props: ["todo"],
+  props: {
+    todo: Object,
+    modelValue: Boolean,
+  },
 };
 </script>
 
