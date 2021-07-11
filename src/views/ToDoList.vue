@@ -41,48 +41,56 @@
 
 <script>
 import ToDoItem from "@/components/ToDoItem.vue";
+import { ref, computed } from "vue";
 export default {
   components: {
     ToDoItem,
   },
-  data() {
-    return {
-      todos: [
-        { id: 1, title: "HTML, CSS & JS lernen", done: false },
-        { id: 2, title: "Vue lernen", done: false },
-        { id: 3, title: "Next facebook bauen", done: true },
-        { id: 4, title: "Vue aufgabe erledigt", done: true },
-        { id: 5, title: "Vue computed properties gelernt", done: true },
-      ],
-      counter: 6,
-      searchQuery: "",
-    };
-  },
-  methods: {
-    addToDo(e) {
-      this.todos.push({ id: this.counter++, title: e.target.value });
+  setup() {
+    const todos = ref([
+      { id: 1, title: "HTML, CSS & JS lernen", done: false },
+      { id: 2, title: "Vue lernen", done: false },
+      { id: 3, title: "Next facebook bauen", done: true },
+      { id: 4, title: "Vue aufgabe erledigt", done: true },
+      { id: 5, title: "Vue computed properties gelernt", done: true },
+    ]);
+    console.log(todos.value);
+    const counter = ref(6);
+    const searchQuery = ref("");
+
+    const addToDo = (e) => {
+      todos.value.push({ id: counter.value++, title: e.target.value });
       e.target.value = "";
-    },
-    deleteToDo(id) {
-      this.todos.splice(
-        this.todos.findIndex((item) => item.id === id),
+    };
+
+    const deleteToDo = (id) => {
+      todos.value.splice(
+        todos.value.findIndex((item) => item.id === id),
         1
       );
-    },
-  },
+    };
 
-  computed: {
-    activeToDos() {
-      return this.todos.filter((item) => !item.done);
-    },
-    doneToDos() {
-      return this.todos.filter((item) => item.done);
-    },
-    filteredToDos() {
-      return this.todos.filter((item) =>
-        item.title.toLowerCase().startsWith(this.searchQuery.toLowerCase())
-      );
-    },
+    const activeToDos = computed(() =>
+      todos.value.filter((item) => !item.done)
+    );
+    const doneToDos = computed(() => todos.value.filter((item) => item.done));
+
+    const filteredToDos = computed(() =>
+      todos.value.filter((item) =>
+        item.title.toLowerCase().startsWith(searchQuery.value.toLowerCase())
+      )
+    );
+
+    return {
+      todos,
+      counter,
+      searchQuery,
+      addToDo,
+      deleteToDo,
+      activeToDos,
+      doneToDos,
+      filteredToDos,
+    };
   },
 };
 </script>
