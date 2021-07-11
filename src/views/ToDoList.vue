@@ -10,6 +10,7 @@
         v-for="todo in filteredToDos"
         :key="todo.id"
         v-bind:todo="todo"
+        v-model="todo.done"
         v-on:onDeleteToDo="deleteToDo"
       />
     </div>
@@ -20,6 +21,7 @@
       v-for="todo in activeToDos"
       :key="todo.id"
       v-bind:todo="todo"
+      v-model="todo.done"
       v-on:onDeleteToDo="deleteToDo"
     />
 
@@ -31,6 +33,7 @@
       v-for="todo in doneToDos"
       :key="todo.id"
       v-bind:todo="todo"
+      v-model="todo.done"
       v-on:onDeleteToDo="deleteToDo"
     />
   </div>
